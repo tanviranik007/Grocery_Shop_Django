@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Carousel
 from django.contrib.auth import authenticate, login
 
@@ -30,9 +30,13 @@ def adminLogin(request):
             if user.is_staff:
                 login(request, user)
                 msg = "User login successfully"
+                return redirect('adminhome')
             else:
                 msg = "Invalid Credentials"
         except:
             msg = "Invalid Credentials"
     dic = {'msg': msg}
     return render(request, 'admin_login.html', dic)
+
+def adminHome(request):
+    return render(request, 'admin_base.html')

@@ -11,6 +11,7 @@ urlpatterns = [
     path('index/', index, name="index"),
     path('about/', about, name="about"),
     path('main/', main, name="main"),
-    path('admin-login/', adminLogin, name="admin-login"),  
+    path('admin-login/', adminLogin, name="admin-login"),
+    path('adminhome/', adminHome, name="adminhome"),  
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
