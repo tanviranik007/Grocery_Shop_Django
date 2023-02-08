@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
-from .models import Carousel
+from .models import Carousel,Category
 from django.contrib.auth import authenticate, login
+from .models import Category
 
 # Create your views here.
 
@@ -20,6 +21,13 @@ def main(request):
     dic={'data':data}
     return render(request, 'index.html',dic)
 
+
+
+
+
+
+
+
 def adminLogin(request):
     msg = None
     if request.method == "POST":
@@ -30,7 +38,7 @@ def adminLogin(request):
             if user.is_staff:
                 login(request, user)
                 msg = "User login successfully"
-                return redirect('adminhome')
+                return redirect('admindashboard')
             else:
                 msg = "Invalid Credentials"
         except:
@@ -38,5 +46,22 @@ def adminLogin(request):
     dic = {'msg': msg}
     return render(request, 'admin_login.html', dic)
 
+
+
+
+
+
+
 def adminHome(request):
     return render(request, 'admin_base.html')
+
+def admin_dashboard(request):
+    return render(request, 'admin_dashboard.html')
+
+
+def add_category(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        Category.objects.create(name=name)
+        msg = "Category added"
+    return render(request, 'add_category.html', locals())

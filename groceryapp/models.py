@@ -8,3 +8,13 @@ class Carousel(models.Model):
     image = models.FileField(null=True, blank=True)
     def __str__(self):
         return self.title
+    
+    
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
