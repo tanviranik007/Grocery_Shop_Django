@@ -50,3 +50,9 @@
     </div>
 </nav> <!-- End Navigation -->
 {% block body %}{% endblock %}
+
+{% for i in messages %}
+<script>
+    alert('{{i}}');
+</script>
+{% endfor %}
