@@ -1,0 +1,73 @@
+{% load static %}
+<html>
+<head>
+    <title>Grocery Booking</title>
+</head>
+<style>
+    label{
+        color:black;
+    }
+</style>
+<body>
+{% include 'navigation.html' %}
+<hr class="mt-0">
+<div class="card shadow m-5" id="signupform">
+    <div class="card-body">
+        <div class="container-fluid">
+            <h5 class="p-2" style="border-bottom: 2px solid orange;color:green">Confirm Booking Detail</h5>
+            <form method="post" name="booking">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" name="fname" id="fname" placeholder="Enter First Name" value="{{user.user.first_name}}" readonly class="form-control"
+                                   pattern="[A-Za-z]+">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" name="lname" value="{{user.user.last_name}}" placeholder="Enter Last Name" readonly class="form-control"
+                                   pattern="[A-Za-z]+">
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Email ID</label>
+                            <input type="email" name="email" placeholder="Email Address" value="{{user.user.username}}" readonly required class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="contact">Contact</label>
+                            <input type="text" name="mobile" placeholder="Contact Number" value="{{user.mobile}}" readonly required
+                                   class="form-control">
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea name="address" class="form-control" placeholder="Full Address" readonly>{{user.address}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Total Price(Rs.)</label>
+                            <input type="text" name="total" class="form-control" value="{{total}}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Book Now" class="m-2 px-3 btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

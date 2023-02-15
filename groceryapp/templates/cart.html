@@ -1,0 +1,64 @@
+{% load static custom_tags %}
+<head>
+    <title>My Cart</title>
+</head>
+{% include 'navigation.html' %}
+
+<div class="container-fluid">
+    <div class="container">
+        <h2 style="font-family:roman;font-size:bold">
+            My Cart
+            <a href="/user-product/0/" class="btn btn-warning " style="float:right">Continue Shopping</a>
+            <a href="/booking/" class="btn btn-info mr-2" style="float:right">Buy Now</a>   
+            <!-- <a href="#" class="btn btn-info mr-2" style="float:right">Buy Now</a> -->
+        <h2>
+        <table class="table table-bordered" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i, j in product.items %}
+                <tr>
+                    <td>
+                        <img class="img-thumbnail" src="{{i|productimage}}" alt="product" style="width:100px;height:100px"></a>
+                    </td>
+                    <td><a href="/product-detail/{{i}}/">{{i|productname}}</a></td>
+                    <td>{{i|productprice}}</td>
+                    <td style="width:15%">
+                        <div class="input-group">
+                            <a href="/incredecre/{{i}}/?action=decre" class="btn btn-warning pull-left" id="decrebtn-{{forloop.counter}}">-</a>
+                            <input type="text" class="cart-plus-minus-box" type="text" style="width:30%;border:1px solid grey" id="shop_qty-{{forloop.counter}}" name="qtybutton" value="{{j}}" readonly/>
+                            <a href="/incredecre/{{i}}/?action=incre" class="btn btn-warning pull-right">+</a>
+                        </div>
+                    </td>
+                    <td id="totalprice-{{forloop.counter}}">{% producttotalprice i j %}</td>
+                    <td>
+                        <a href="/deletecart/{{i}}/" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="2" id="total-price"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    var prolenth = '{{lengthpro}}';
+    var mytotal = 0;
+    for(var i=1;i<=prolenth*1;i++){
+        totalprice = parseFloat(document.getElementById('totalprice-'+i).innerHTML);
+        var mytotal = parseFloat(mytotal) + (totalprice);
+    }
+    document.getElementById('total-price').innerHTML  = mytotal;
+</script>

@@ -22,5 +22,18 @@ urlpatterns = [
     path('view-product/', view_product, name='view-product'),
     path('edit-product/<int:pid>/', edit_product, name="edit_product"),
     path('delete-product/<int:pid>/', delete_product, name="delete_product"),
+    path('registration/', registration, name="registration"),
+    path('userlogin/', userlogin, name="userlogin"),
+    path('profile/', profile, name="profile"),
+    path('logout/', logoutuser, name="logout"),
+    path('change-password/', change_password, name="change-password"),
+    path('user-product/<int:pid>/', user_product, name="user_product"),
+    path('product-detail/<int:pid>/', product_detail, name="product_detail"),
     
+    path('add-to-cart/<int:pid>/', addToCart, name="addToCart"),
+    path('cart/', cart, name="cart"),
+    path('incredecre/<int:pid>/', incredecre, name="incredecre"),
+    path('deletecart/<int:pid>/', deletecart, name="deletecart"),
+    path('booking/', booking, name="booking"),
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
