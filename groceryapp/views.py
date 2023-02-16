@@ -4,21 +4,30 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 import json
-
+from django.http import HttpResponse
 from django.contrib import messages
+
+
+
+
+
 # Create your views here.
 
 
-
+#home
 def home(request):
     return render(request, 'home.html')
 
+
+#index
 def index(request):
     return render(request, 'navigation.html')
 
+#about
 def about(request):
     return render(request, 'about.html')
 
+#main
 def main(request):
     data = Carousel.objects.all()
     dic={'data':data}
@@ -30,7 +39,7 @@ def main(request):
 
 
 
-
+#adninLogin
 def adminLogin(request):
     # msg = None
     if request.method == "POST":
@@ -55,14 +64,19 @@ def adminLogin(request):
 
 
 
-
+#adminHome
 def adminHome(request):
     return render(request, 'admin_base.html')
 
+
+#admin_dashbord
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 
 
+
+
+#add_category
 def add_category(request):
     if request.method == "POST":
         name = request.POST['name']
@@ -72,6 +86,8 @@ def add_category(request):
     return render(request, 'add_category.html', locals())
 
 
+
+#view_category
 def view_category(request):
     category = Category.objects.all()
     return render(request, 'view_category.html', locals())
@@ -80,6 +96,9 @@ def view_category(request):
 
 
 
+
+
+#edit_category
 def edit_category(request, pid):
     category = Category.objects.get(id=pid)
     if request.method == "POST":
@@ -92,6 +111,10 @@ def edit_category(request, pid):
 
 
 
+
+
+
+#delete_category
 def delete_category(request, pid):
     category = Category.objects.get(id=pid)
     category.delete()
@@ -101,8 +124,11 @@ def delete_category(request, pid):
 
 
 
-# For Product
 
+
+
+
+# For Product
 def add_product(request):
     category = Category.objects.all()
     if request.method == "POST":
@@ -119,6 +145,11 @@ def add_product(request):
 
 
 
+
+
+
+
+#view_product
 def view_product(request):
     product = Product.objects.all()
     return render(request, 'view_product.html', locals())
@@ -128,6 +159,8 @@ def view_product(request):
 
 
 
+
+#edit_product
 def edit_product(request, pid):
     product = Product.objects.get(id=pid)
     category = Category.objects.all()
@@ -150,6 +183,10 @@ def edit_product(request, pid):
 
 
 
+
+
+
+#delect_product
 def delete_product(request, pid):
     product = Product.objects.get(id=pid)
     product.delete()
@@ -157,6 +194,10 @@ def delete_product(request, pid):
     return redirect('view-product')
 
 
+
+
+
+#registration
 def registration(request):
     if request.method == "POST":
         fname = request.POST['fname']
@@ -174,6 +215,12 @@ def registration(request):
 
 
 
+
+
+
+
+
+#userlogin
 def userlogin(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -191,6 +238,9 @@ def userlogin(request):
 
 
 
+
+
+#profile
 def profile(request):
     data = UserProfile.objects.get(user=request.user)
     if request.method == "POST":
@@ -212,11 +262,16 @@ def profile(request):
     return render(request, 'profile.html', locals())
 
 
+
+
+
 # UserLogout
 def logoutuser(request):
     logout(request)
     messages.success(request, "Logout Successfully")
     return redirect('main')
+
+
 
 
 
@@ -246,7 +301,7 @@ def change_password(request):
 
 
 
-
+#user_product
 def user_product(request,pid):
     if pid == 0:
         product = Product.objects.all()
@@ -258,11 +313,16 @@ def user_product(request,pid):
 
 
 
+
+
 #Product Details
 def product_detail(request, pid):
     product = Product.objects.get(id=pid)
     latest_product = Product.objects.filter().exclude(id=pid).order_by('-id')[:10]
     return render(request, "product_detail.html", locals())
+
+
+
 
 
 
@@ -285,8 +345,10 @@ def addToCart(request, pid):
 
 
 
-#IncreaseDecrease
 
+
+
+#IncreaseDecrease
 def incredecre(request, pid):
     cart = Cart.objects.get(user=request.user)
     if request.GET.get('action') == "incre":
@@ -302,6 +364,10 @@ def incredecre(request, pid):
     cart.save()
     return redirect('cart')
 
+
+
+
+
 #Cart
 def cart(request):
     try:
@@ -315,6 +381,10 @@ def cart(request):
     return render(request, 'cart.html', locals())
 
 
+
+
+
+
 #deletecart
 def deletecart(request, pid):
     cart = Cart.objects.get(user=request.user)
@@ -326,8 +396,11 @@ def deletecart(request, pid):
     messages.success(request, "Delete Successfully")
     return redirect('cart')
 
+
+
+
+
  #Booking
- 
 def booking(request):
     user = UserProfile.objects.get(user=request.user)
     cart = Cart.objects.get(user=request.user)
@@ -343,9 +416,129 @@ def booking(request):
         product = Product.objects.get(id=i)
         total += int(j) * int(product.price)
     if request.method == "POST":
+        return redirect('/payment/?total='+str(total))
+    return render(request, "booking.html", locals()) 
+
+
+
+
+
+#My Order
+def myOrder(request):
+    order = Booking.objects.filter(user=request.user)
+    return render(request, "my-order.html", locals())
+
+
+
+
+#Order Track
+def user_order_track(request, pid):
+    order = Booking.objects.get(id=pid)
+    orderstatus = ORDERSTATUS
+    return render(request, "user-order-track.html", locals())
+
+
+
+
+
+
+#order Cancel
+def change_order_status(request, pid):
+    order = Booking.objects.get(id=pid)
+    status = request.GET.get('status')
+    if status:
+        order.status = status
+        order.save()
+        messages.success(request, "Order status changed.")
+    return redirect('myorder')
+
+
+
+
+
+
+#UserFeedback
+def user_feedback(request):
+    user = UserProfile.objects.get(user=request.user)
+    if request.method == "POST":
+        Feedback.objects.create(user=request.user, message=request.POST['feedback'])
+        messages.success(request, "Feedback sent successfully")
+    return render(request, "feedback-form.html", locals())
+
+
+
+
+
+
+
+#manageFeedback
+def manage_feedback(request):
+    action = request.GET.get('action', 0)
+    feedback = Feedback.objects.filter(status=int(action))
+    return render(request, 'manage_feedback.html', locals())
+
+
+
+
+
+#deletefeedback
+def delete_feedback(request, pid):
+    feedback = Feedback.objects.get(id=pid)
+    feedback.delete()
+    messages.success(request, "Deleted successfully")
+    return redirect('/manage-feedback/?action=1')
+
+
+
+
+
+
+
+#
+def read_feedback(request, pid):
+    feedback = Feedback.objects.get(id=pid)
+    feedback.status = 1
+    feedback.save()
+    return HttpResponse(json.dumps({'id':1, 'status':'success'}), content_type="application/json")
+
+
+
+
+
+#payment
+def payment(request):
+    total = request.GET.get('total')
+    cart = Cart.objects.get(user=request.user)
+    if request.method == "POST":
         book = Booking.objects.create(user=request.user, product=cart.product, total=total)
-        cart.product = {'objects':[]}
+        cart.product = {'objects': []}
         cart.save()
         messages.success(request, "Book Order Successfully")
-        return redirect('main')
-    return render(request, "booking.html", locals())
+        return redirect('myorder')
+    return render(request, 'payment.html', locals())
+
+
+
+
+
+#manage order
+def manage_order(request):
+    action = request.GET.get('action', 0)
+    order = Booking.objects.filter(status=int(action))
+    order_status = ORDERSTATUS[int(action)-1][1]
+    if int(action) == 0:
+        order = Booking.objects.filter()
+        order_status = 'All'
+    return render(request, 'manage_order.html', locals())
+
+
+
+
+#delete order
+def delete_order(request, pid):
+    order = Booking.objects.get(id=pid)
+    order.delete()
+    messages.success(request, 'Order Deleted')
+    return redirect('/manage-order/?action='+request.GET.get('action'))
+
+

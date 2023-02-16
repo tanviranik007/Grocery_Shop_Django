@@ -1,7 +1,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Grocery Booking</title>
+    <title>Feedback Form</title>
 </head>
 <style>
     label{
@@ -11,25 +11,23 @@
 <body>
 {% include 'navigation.html' %}
 <hr class="mt-0">
-<div class="card shadow m-5" id="bookingpage">
+<div class="card shadow m-5">
     <div class="card-body">
         <div class="container-fluid">
-            <h5 class="p-2" style="border-bottom: 2px solid orange;color:green">Confirm Booking Detail</h5>
-            <form method="post" name="booking">
+            <h5 class="p-2" style="border-bottom: 2px solid orange;color:green">Feedback Form</h5>
+            <form method="post" action="" name="feedback">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="fname">First Name</label>
-                            <input type="text" name="fname" id="fname"  value="{{user.user.first_name}}" readonly class="form-control"
-                                   pattern="[A-Za-z]+">
+                            <input type="text" name="fname" id="fname"  value="{{user.user.first_name}}" readonly class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input type="text" name="lname" value="{{user.user.last_name}}"  readonly class="form-control"
-                                   pattern="[A-Za-z]+">
+                            <input type="text" name="lname" value="{{user.user.last_name}}"  readonly class="form-control">
                         </div>
                     </div>
 
@@ -37,7 +35,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Email ID</label>
-                            <input type="email" name="email"  value="{{user.user.username}}" readonly required class="form-control">
+                            <input type="email" name="email"  value="{{user.user.username}}" readonly class="form-control">
                         </div>
                     </div>
 
@@ -52,22 +50,16 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Address</label>
-                            <textarea name="address" class="form-control"  readonly>{{user.address}}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Total Price(Tk.)</label>
-                            <input type="text" name="total" class="form-control" value="{{total}}" readonly>
+                            <label>Write your feedback</label>
+                            <textarea name="feedback" class="form-control" placeholder="Write your feedback"></textarea>
                         </div>
                     </div>
                 </div>
-                <input type="submit" value="Book Now" class="m-2 px-3 btn btn-primary">
+                <input type="submit" value="send feedback" class="m-2 px-3 btn btn-primary">
             </form>
         </div>
     </div>
 </div>
+
 </body>
 </html>

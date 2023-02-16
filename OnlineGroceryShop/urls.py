@@ -35,5 +35,15 @@ urlpatterns = [
     path('incredecre/<int:pid>/', incredecre, name="incredecre"),
     path('deletecart/<int:pid>/', deletecart, name="deletecart"),
     path('booking/', booking, name="booking"),
+    path('my-order/', myOrder, name="myorder"),
+    path('user-order-track/<int:pid>/', user_order_track, name="user_order_track"),
+    path('change-order-status/<int:pid>/', change_order_status, name="change_order_status"),
+    path('user-feedback/', user_feedback, name="user_feedback"),
+    path('manage-feedback/', manage_feedback, name="manage_feedback"),
+    path('delete-feedback/<int:pid>/', delete_feedback, name="delete-feedback"),
+    path('feedback-read/<int:pid>/', read_feedback, name="read_feedback"),
+    path('payment/', payment, name="payment"),
+    path('manage-order/', manage_order, name="manage_order"),
+    path('delete-order/<int:pid>/', delete_order, name="delete-order"),   
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

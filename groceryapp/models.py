@@ -79,3 +79,14 @@ class Booking(models.Model):
     
 
 
+#FeedBack
+STATUS = ((1, "Read"), (2, "Unread"))
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
+    status = models.IntegerField(choices=STATUS, default=2)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.username

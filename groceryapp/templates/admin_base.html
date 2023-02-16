@@ -45,7 +45,7 @@
  
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark bg-light" href="#" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-chart-bar mr-3 text-primary fa-fw"></i> Grocery Category
+                <i class="fas fa-chart-bar mr-3 text-primary fa-fw"></i> Fashion Category
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{%url 'add-category' %}">Add Category</a>
@@ -73,18 +73,51 @@
  
             </div>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a href="" class="nav-link text-dark bg-light">
                 <i class="fas fa-cog mr-3 text-primary fa-fw"></i>
                 Manage Order
             </a>
+        </li> -->
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark bg-light" href="#" id="navbardrop" data-toggle="dropdown">
+                <i class="fas fa-chart-bar mr-3 text-primary fa-fw"></i>Manage Order
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/manage-order/?action=1">New Order</a>
+                <a class="dropdown-item" href="/manage-order/?action=2">Dispatch Order</a>
+                <a class="dropdown-item" href="/manage-order/?action=3">On the way</a>
+                <a class="dropdown-item" href="/manage-order/?action=4">Delivered Order</a>
+                <a class="dropdown-item" href="/manage-order/?action=5">Cancel Order</a>
+                <a class="dropdown-item" href="/manage-order/?action=6">Return Order</a>
+                <a class="dropdown-item" href="/manage-order/?action=0">All Order</a>
+            </div>
         </li>
-        <li class="nav-item">
+
+        
+
+        <!-- <li class="nav-item">
             <a href="" class="nav-link text-dark bg-light">
                 <i class="fas fa-cog mr-3 text-primary fa-fw"></i>
                 Manage Feedback
             </a>
+        </li> -->
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark bg-light" href="#" id="navbardrop" data-toggle="dropdown">
+                <i class="fas fa-chart-bar mr-3 text-primary fa-fw"></i>Manage Feedback
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/manage-feedback/?action=1">Read Feedback</a>
+                <a class="dropdown-item" href="/manage-feedback/?action=2">Unread Feedback</a>
+            </div>
         </li>
+
+
+
+
         <li class="nav-item">
             <a href="" class="nav-link text-dark bg-light">
                 <i class="fas fa-cog mr-3 text-primary fa-fw"></i>

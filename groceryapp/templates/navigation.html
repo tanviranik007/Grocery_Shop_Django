@@ -30,12 +30,13 @@
 <link rel="icon" href="{% static 'images/donation.png' %}">
 <title>Online Grocery Shop</title>
 <!-- Start Nagigation -->
-<nav class="navbar navbar-expand-sm navbar-light">
+<nav class="navbar navbar-expand-sm navbar-light"> 
     <div class="container-fluid">
         <a href="#" class="navbar-brand">
-            &nbsp;<span style="color:red">Pan</span>
-            <span style="color:green">Jabi</span>
-            <span style="color:blue">Wala</span></a>
+            &nbsp;<span style="color:red; font-size: 35px;">Star</span>
+            <span style="color:green; font-size: 30px;">Crushers</span>
+            <!-- <span style="color:blue; font-size: 25px;">Fashion</span> -->
+            </a>
         <!--<span class="navbar-text blinking">Enjoy Programming</span>-->
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myMenu">
             <span class="navbar-toggler-icon"></span>
@@ -54,8 +55,9 @@
                 <li class="nav-item"><a href="{% url 'registration' %}" class="nav-link">Signup</a></li>
                 <li class="nav-item"><a href="{% url 'admin-login' %}" class="nav-link">Admin Login</a></li>
                 {% else %}
-                <li class="nav-item"><a href="" class="nav-link">Feedback</a></li>
-                <li class="nav-item"><a href="" class="nav-link">My Order</a></li>
+                <!-- <li class="nav-item"><a href="" class="nav-link">Feedback</a></li> -->
+                <li class="nav-item"><a href="/user-feedback/" class="nav-link">Feedback</a></li>
+                <li class="nav-item"><a href="/my-order/" class="nav-link">My Order</a></li>
                 <li class="nav-item"><a href="/cart/" class="nav-link">My Cart</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
